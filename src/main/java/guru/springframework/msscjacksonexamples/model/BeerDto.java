@@ -1,5 +1,7 @@
 package guru.springframework.msscjacksonexamples.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +22,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class BeerDto {
-
+    //override snake-naming strategy, kebab n s
+@JsonProperty("beerId")
     @Null
     private UUID id;
 
@@ -33,7 +36,9 @@ public class BeerDto {
     @Positive
     private Long upc;
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING)
     private BigDecimal price;
+    @JsonFormat(pattern="yyyy-MM-dd",shape=JsonFormat.Shape.STRING)
     private OffsetDateTime createdDate;
     private OffsetDateTime lastUpdatedDate;
 }
